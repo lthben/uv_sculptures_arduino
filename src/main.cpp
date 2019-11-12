@@ -36,6 +36,8 @@ const int sliderPin = A0;
 #define __SCULPTURE1__  //Ann
 // #define __SCULPTURE2__  //Soh & Suang
 
+const int MAXBRIGHTLVL = 160;
+
 //band 1 is inner most centre where the idle fade animation starts from
 //number of pixels (every 10cm) for each data pin controlled led strip
 //number system is NX_BX_SX where NX is SCULPTURE ID number, BX is band number and SX is the individual strip number within the band
@@ -76,10 +78,10 @@ bool isButtonPressed, isSliderToggled;
 #if defined(__SCULPTURE1__)
 CHSV myIdleColor = cyellow;
 const int SCULPTURE_ID = 1;
-const int idleTrackNum = 1, activeTrackNum = 4;
+const int idleTrackNum = 4, activeTrackNum = 1;
 CRGB leds0[p1_1_x], leds1[p1_2_x], leds2[p1_3_x], leds3[p1_4_1], leds4[p1_4_2], leds5[p1_5_1], leds6[p1_5_2], leds7[p1_6_1], leds8[p1_6_2], leds9[p1_6_3];
 const int n1 = p1_1_x, n2 = p1_2_x, n3 = p1_3_x, n4 = p1_4_1, n5 = p1_4_2, n6 = p1_5_1, n7 = p1_5_2, n8 = p1_6_1, n9 = p1_6_2, n10 = p1_6_3; //for common code for both sculptures
-float vol = 0.6; //hard to access the vol knob on the amp, so adjust in software
+float vol = ; //hard to access the vol knob on the amp, so adjust in software
 
 #elif defined(__SCULPTURE2__)
 CHSV myIdleColor = cpink;
@@ -96,12 +98,12 @@ float vol = 0.7; //master volume gain 0.0 - 1.0
 #define UPDATES_PER_SECOND 100 //speed of light animation
 
 int brightness1, brightness2, brightness3, brightness4, brightness5, brightness6, brightness7; //band 1 to 7 brightness
-int maxBrightLvl = 255;                                                           //variable max brightness
 const int IDLE_MODE = 1, BUTTON_MODE = 2, SLIDER_MODE = 3;
 unsigned int playMode = IDLE_MODE; 
-bool hasplayModeChanged; //for audio track changes
+bool hasplayModeChanged = true; //for audio track changes
 int activeLedState = 0;            //to track led animaton states, e.g. 0 - idle mode, start fade to black 1 - show brightness according to reading, 2 - has completed animations, fade to black and idle
 bool isMaxBrightness = false;      //to track idle animation direction
+int maxBrightLvl = MAXBRIGHTLVL; //variable max brightness
 elapsedMillis bandms;              //multiple use time ellapsed counter
 unsigned int band_delay = BAND_DELAY; //speed of fade animation
 int readings1[NUMDATA1], readings2[NUMDATA2]; //brightness values translated from UV readings
@@ -177,7 +179,7 @@ void setup()
 --------------------------------------------------------------------------------*/
 void loop()
 {
-  read_console(); //listen to buttons and sliders
+  // read_console(); //listen to buttons and sliders
 
   check_playMode();
 

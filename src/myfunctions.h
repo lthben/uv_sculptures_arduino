@@ -634,7 +634,7 @@ void go_idle()
   playMode = IDLE_MODE;
   hasplayModeChanged = true; //trigger sound change
   band_delay = BAND_DELAY;
-  maxBrightLvl = 255;
+  maxBrightLvl = MAXBRIGHTLVL;
   Serial.println("IDLE MODE");
   isMaxBrightness = false;
   brightness1 = brightness2 = brightness3 = brightness4 = brightness5 = brightness6 = brightness7 = 0;
