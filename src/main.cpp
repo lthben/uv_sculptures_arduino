@@ -81,7 +81,7 @@ const int SCULPTURE_ID = 1;
 const int idleTrackNum = 4, activeTrackNum = 1;
 CRGB leds0[p1_1_x], leds1[p1_2_x], leds2[p1_3_x], leds3[p1_4_1], leds4[p1_4_2], leds5[p1_5_1], leds6[p1_5_2], leds7[p1_6_1], leds8[p1_6_2], leds9[p1_6_3];
 const int n1 = p1_1_x, n2 = p1_2_x, n3 = p1_3_x, n4 = p1_4_1, n5 = p1_4_2, n6 = p1_5_1, n7 = p1_5_2, n8 = p1_6_1, n9 = p1_6_2, n10 = p1_6_3; //for common code for both sculptures
-float vol = ; //hard to access the vol knob on the amp, so adjust in software
+float vol = 10; //hard to access the vol knob on the amp, so adjust in software
 
 #elif defined(__SCULPTURE2__)
 CHSV myIdleColor = cpink;
@@ -89,7 +89,7 @@ const int SCULPTURE_ID = 2;
 const int idleTrackNum = 2, activeTrackNum = 3;
 CRGB leds0[p2_1_1], leds1[p2_1_2], leds2[p2_1_3], leds3[p2_2_x], leds4[p2_3_x], leds5[p2_4_x], leds6[p2_5_x], leds7[p2_6_x], leds8[p2_7_x], leds9[0]; //need to define "leds9[]" else cannot compile
 const int n1 = p2_1_1, n2 = p2_1_2, n3 = p2_1_3, n4 = p2_2_x, n5 = p2_3_x, n6 = p2_4_x, n7 = p2_5_x, n8 = p2_6_x, n9 = p2_7_x, n10 = 0; //for common code for both sculptures
-float vol = 0.7; //master volume gain 0.0 - 1.0
+float vol = 10; //master volume gain 0.0 - 1.0
 
 #else
 #error "invalid sculpture ID"
@@ -136,6 +136,7 @@ void setup()
       delay(0); // Code to compatible with ESP8266 watch dog.
     }
   }
+  myDFPlayer.volume(vol);
   Serial.println(F("DFPlayer Mini online."));
 
   delay(2000); //power up safety delay
