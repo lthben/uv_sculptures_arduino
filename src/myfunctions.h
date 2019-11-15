@@ -22,11 +22,11 @@ void read_console()
   {
     if (SCULPTURE_ID == 1)
     {
-      if (currSliderVal >= 180 && currSliderVal < 300) currSliderPosIndex = 0;
-      else if (currSliderVal >= 300 && currSliderVal < 520) currSliderPosIndex = 1;
-      else if (currSliderVal >= 520 && currSliderVal < 720) currSliderPosIndex = 2;
-      else if (currSliderVal >= 720 && currSliderVal < 920) currSliderPosIndex = 3;
-      else if (currSliderVal >= 920 && currSliderVal < 1024) currSliderPosIndex = 4;  
+      if (currSliderVal >= 105 && currSliderVal < 315) currSliderPosIndex = 0;
+      else if (currSliderVal >= 315 && currSliderVal < 530) currSliderPosIndex = 1;
+      else if (currSliderVal >= 530 && currSliderVal < 720) currSliderPosIndex = 2;
+      else if (currSliderVal >= 720 && currSliderVal < 890) currSliderPosIndex = 3;
+      else if (currSliderVal >= 890 && currSliderVal < 1024) currSliderPosIndex = 4;  
     }
     else //sculpture 2
     {
@@ -677,18 +677,18 @@ void playback_readings() //light sequence playback according to readings[] array
       {
         if (activeColor1.val < currBrightVal)
         { //brighten
-          activeColor1.val += 5;
-          activeColor2.val += 5;
-          activeColor3.val += 5;
+          activeColor1.val += 2;
+          activeColor2.val += 2;
+          activeColor3.val += 2;
         }
       }
       else //curr is < prev bright val
       {
         if (activeColor1.val > currBrightVal)
         { //dim
-          activeColor1.val -= 5;
-          activeColor2.val -= 5;
-          activeColor3.val -= 5;
+          activeColor1.val -= 2; 
+          activeColor2.val -= 2; 
+          activeColor3.val -= 2; 
         }
       }
 
@@ -710,12 +710,11 @@ void playback_readings() //light sequence playback according to readings[] array
       Serial.print("\t currBrightVal: ");
       Serial.println(currBrightVal);
 
-      bandms = 0; //need to reset here
-
       if ((SCULPTURE_ID == 1 && readingsCounter == NUMDATA1) || (SCULPTURE_ID == 2 && readingsCounter == NUMDATA2))
       {
         activeLedState = 2; //go to next state
       }
+      bandms = 0; //need to reset here
     }
   }
   else if (activeLedState == 2)
